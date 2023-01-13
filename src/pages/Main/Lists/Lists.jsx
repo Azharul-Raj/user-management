@@ -1,16 +1,28 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { DataContext } from "../../../contexts/dataProvider";
 
 const Lists = (client) => {
-    const { id,Location,Time,Date}=client.client
+    const { id1,setId,refresh,setRefresh } = useContext(DataContext);
+    const { id, Location, Time, Date } = client.client;
+
+    const handleId = async(id) => {
+        await setId(id)
+        await setRefresh(!refresh)
+    }
+    console.log(id1);
     return (
-        <div class="max-w-2xl my-5 px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-200">
-        <div class="flex items-center justify-between">
-                <span class="text-sm font-light text-black">{ id} : {Location}</span>
-                <span class="text-sm font-light text-black">{Date} { Time}</span>
-            {/* <a class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabindex="0" role="button">Design</a> */}
+        <Link onClick={()=>handleId(id)}>
+        <div className={`"max-w-2xl my-5 px-8 py-4 bg-gray-200 rounded-lg shadow-md dark:bg-gray-200"`}>
+        <div className="flex items-center justify-between">
+                <span className="text-sm font-light text-black">{ id} : {Location}</span>
+                <span className="text-sm font-light text-black">{Date} { Time}</span>
+            {/* <a className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabindex="0" role="button">Design</a> */}
         </div>
             <h1>person detected</h1>
         
-    </div>
+            </div>
+             </Link>
     );
 };
 

@@ -3,6 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import {db} from "../../firebase/firebase.config"
 import Lists from './Lists/Lists';
 import { FaSlidersH } from 'react-icons/fa';
+import Details from './Details';
 
 const HomePage = () => {
     const [clients, setClients] = useState([]);
@@ -21,15 +22,21 @@ const HomePage = () => {
     }, [])
 
     return (
+        <>
+            {/* header */}
+            <h1>Hey</h1>
+            {/* header */}
         <div className='grid lg:grid-cols-12'>
             {/* left side */}
-            <div className="col-span-8">info</div>
+            <div className="col-span-8">
+                <Details/>
+            </div>
             {/* right side */}
             <div className="col-span-4">
                 <div className="flex justify-between">
                     {/* left line */}
             <div className="relative">
-                <div class="absolute right-0 -ml-0.5 w-1 h-screen bg-gray-600"></div>
+                <div className="absolute right-0 -ml-0.5 w-1 h-screen bg-gray-600"></div>
                     </div>
                     {/* data list below */}
                     <div className="w-11/12 h-[100vh] overflow-scroll scrollbar-hide">
@@ -47,11 +54,12 @@ const HomePage = () => {
                     </div>
                     {/* right line */}
                 <div className="relative mx-1">
-                    <div class="absolute right-0 -ml-0.5 w-1 h-screen bg-gray-600"></div>
+                    <div className="absolute right-0 -ml-0.5 w-1 h-screen bg-gray-600"></div>
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+            </>
     );
 };
 
