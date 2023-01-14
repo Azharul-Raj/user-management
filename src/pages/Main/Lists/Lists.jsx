@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../../../contexts/dataProvider";
 
 const Lists = (client) => {
-    const { id1,setId,refresh,setRefresh } = useContext(DataContext);
-    const { id, Location, Time, Date } = client.client;
-
-    const handleId = async(id) => {
-        await setId(id)
-        await setRefresh(!refresh)
+    const { setId,refresh,setRefresh } = useContext(DataContext);
+    const { id, Location, Time, Date, Gender } = client.client;
+   
+    const handleId =  (id) => {
+        setId(id)
+        setRefresh(!refresh)
     }
-    console.log(id1);
+    
     return (
         <Link onClick={()=>handleId(id)}>
         <div className={`"max-w-2xl my-5 px-8 py-4 bg-gray-200 rounded-lg shadow-md dark:bg-gray-200"`}>

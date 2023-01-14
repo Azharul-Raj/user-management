@@ -4,7 +4,7 @@ import { db } from "../../firebase/firebase.config";
 import { DataContext } from "../../contexts/dataProvider";
 
 const Details = () => {
-  const { id1, refresh } = useContext(DataContext);
+  const { id1, refresh,maleCount,femaleCount } = useContext(DataContext);
   console.log(id1);
   const [details, setDetails] = useState({});
   useEffect(() => {
@@ -22,7 +22,7 @@ const Details = () => {
     };
     fetchData();
   }, [refresh]);
-  console.log('from details',details.Name)
+  console.log('from details',femaleCount)
   return (
     <>
     <div className="relative flex flex-col-reverse py-16 lg:py-0 mx-5 lg:flex-col">
