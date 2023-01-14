@@ -13,23 +13,30 @@ const Header = () => {
     const [clients, setClients] = useState([]);
     const clientsMemo=useMemo(()=>clients,[clients])
     // data fetching part
-    useEffect(() => {
-      const fetchData = async () => {
-        let list = [];
-        const data = await getDocs(collection(db, "user-management"));
-        data.forEach((doc) => {
-          if (doc.data().Gender === "Male") {
-            setMaleCount((prev) => prev + 1);
-          }
-          if (doc.data().Gender === "Female") {
-            setFemaleCount((prev) => prev + 1);
-          }
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setClients(list);
-      };
-      fetchData();
-    }, []);
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     let list = [];
+    //     const data = await getDocs(collection(db, "user-management"));
+    //     data.forEach((doc) => {
+    //       if (doc.data().Gender === "Male") {
+    //         setMaleCount((prev) => prev + 1);
+    //       }
+    //       if (doc.data().Gender === "Female") {
+    //         setFemaleCount((prev) => prev + 1);
+    //       }
+    //       list.push({ id: doc.id, ...doc.data() });
+    //     });
+    //     setClients(list);
+    //   };
+    //   fetchData();
+    // }, []);
+  
+  // using REST
+  useEffect(() => {
+    fetch("http://localhost:3001/all-user")
+      .then(res => res.json())
+    .then(data=>setClients(data))
+  },[])
   return (
     <>
       {/* header */}

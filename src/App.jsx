@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+
 import './App.css'
-import HomePage from './pages/Main/HomePage'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import {  RouterProvider } from 'react-router-dom'
 import { routes } from './layouts/Routes'
 
 function App() {
@@ -11,7 +9,6 @@ function App() {
   return (
     <RouterProvider router={router}>
     <div className="App">
-      {/* <HomePage/> */}
       </div>
       </RouterProvider>
   )
