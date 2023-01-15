@@ -8,6 +8,7 @@ import Lists from "../Main/Lists/Lists";
 import { DataContext } from "../../contexts/dataProvider";
 import { Outlet } from "react-router-dom";
 import { db } from "../../firebase/firebase.config";
+import Dropdown from "./Dropdown";
 const Header = () => {
     let { filter,maleCount,femaleCount,setFemaleCount, setMaleCount } = useContext(DataContext);
     const [clients, setClients] = useState([]);
@@ -86,24 +87,7 @@ const Header = () => {
                 </div>
                 <div className="antialiased">
                   {/* dropdown */}
-                  <div class="space-y-0.5">
-  <select
-    id="basic"
-    name="basic"
-    class="">
-    <option selected><FaSlidersH/></option>
-                      <option>
-                      <div className="dropdown dropdown-end">
-  <label tabIndex={0} className="btn m-1">Click</label>
-  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-    </option>
-    <option>Tomato</option>
-  </select>
-</div>
+                    <Dropdown/>
                   {/* dropdown */}
                 </div>
               </div>

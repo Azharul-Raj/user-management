@@ -8,6 +8,11 @@ body {
   background-color: white;
 }
 
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    margin: 0px;
+    margin-right: 20px !important; }
+
 
 /* :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
