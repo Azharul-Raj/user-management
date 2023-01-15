@@ -7,28 +7,28 @@ const Details = () => {
   const { id1, refresh } = useContext(DataContext);
   // console.log(id1);
   const [details, setDetails] = useState({});
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const docRef = doc(db, "user-management", id1);
-  //     const docSnap = await getDoc(docRef);
+  useEffect(() => {
+    const fetchData = async () => {
+      const docRef = doc(db, "user-management", id1);
+      const docSnap = await getDoc(docRef);
 
-  //     if (docSnap.exists()) {
-  //       setDetails(docSnap.data());
-  //       // console.log("Document data:", docSnap.data());
-  //     } else {
-  //       // doc.data() will be undefined in this case
-  //       console.log("No such document!");
-  //     }
-  //   };
-  //   fetchData();
-  // }, [refresh]);
+      if (docSnap.exists()) {
+        setDetails(docSnap.data());
+        // console.log("Document data:", docSnap.data());
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    };
+    fetchData();
+  }, [refresh]);
 
   // using REST
-  useEffect(() => {
-    fetch(`http://localhost:3001/user/${id1}`)
-      .then(res => res.json())
-    .then(data=>setDetails(data))
-  },[refresh])
+  // useEffect(() => {
+  //   fetch(`http://localhost:3001/user/${id1}`)
+  //     .then(res => res.json())
+  //   .then(data=>setDetails(data))
+  // },[refresh])
 
   return (
     <>
