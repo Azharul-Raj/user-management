@@ -2,10 +2,10 @@ import { createContext, useState } from "react";
 
 export const DataContext=createContext()
 const DataProvider = ({ children }) => {
+    const [filter, setFilter] = useState("");
     const [refresh, setRefresh] = useState(true);
     let [maleCount, setMaleCount] = useState(0);
     const [femaleCount, setFemaleCount] = useState(0);
-    const [filter, setFilter] = useState("Male");
     if(filter===""){
         var [id1, setId] = useState("EVT0001")
     }
