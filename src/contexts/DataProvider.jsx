@@ -5,14 +5,14 @@ const DataProvider = ({ children }) => {
     const [refresh, setRefresh] = useState(true);
     let [maleCount, setMaleCount] = useState(0);
     const [femaleCount, setFemaleCount] = useState(0);
-    const [filter, setFilter] = useState("");
+    const [filter, setFilter] = useState("Male");
     if(filter===""){
-    var [id1, setId] = useState("EVT0001")
+        var [id1, setId] = useState("EVT0001")
     }
     else if (filter === "Male") {
         var [id1, setId] = useState("EVT0002")
     }
-    const data={id1,setId,refresh,setRefresh,maleCount,setMaleCount,femaleCount,setFemaleCount,filter,setFilter}
+    const data={id1,filter,setFilter,setId,refresh,setRefresh,maleCount,setMaleCount,femaleCount,setFemaleCount}
     return (
         <DataContext.Provider value={data}>
             {

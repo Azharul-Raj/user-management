@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../../../contexts/dataProvider";
 
 const Lists = (client) => {
-  const { id1, setId, refresh, setRefresh } = useContext(DataContext);
+  const { file,id1, setId, refresh, setRefresh } = useContext(DataContext);
   const { id, Location, Time, Date } = client.client;
 
   const handleId = (id) => {
     setId(id);
     setRefresh(!refresh);
   };
-  console.log(id1);
+  
   return (
     <Link onClick={() => handleId(id)}>
       <div

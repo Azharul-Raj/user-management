@@ -1,46 +1,58 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { collection, query,where,getDocs } from "firebase/firestore";
 
 
-import { FaSlidersH } from "react-icons/fa";
 
 import Lists from "../Main/Lists/Lists";
 import { DataContext } from "../../contexts/dataProvider";
 import { Outlet } from "react-router-dom";
 import { db } from "../../firebase/firebase.config";
-import Dropdown from "./Dropdown";
+import Dropdown from "../../components/Dropdown";
 const Header = () => {
-    let { filter,maleCount,femaleCount,setFemaleCount, setMaleCount } = useContext(DataContext);
+    let {filter,setFilter, maleCount,femaleCount,setFemaleCount, setMaleCount } = useContext(DataContext);
     const [clients, setClients] = useState([]);
-    const clientsMemo=useMemo(()=>clients,[clients])
+    // dropdown states
+
+  //dropdown states
     // data fetching part
-    console.log('check filter',filter);
-    useEffect(() => {
+  const compress = (allData) => {
+    const list=[]
+    allData.forEach((doc) => {
+      if (doc.data().Gender === "Male") {
+        setMaleCount((prev) => prev + 1);
+      }
+      if (doc.data().Gender === "Female") {
+        setFemaleCount((prev) => prev + 1);
+      }
+      list.push({ id: doc.id, ...doc.data() });
+    });
+    return list;
+  }
+  console.log("from header",filter)
+  useEffect(() => {
       const fetchData = async () => {
-        let list = [];
+        let list;
         let allData;
         if (filter==="") {
-          allData=await getDocs(collection(db,"user-management"))
+          allData = await getDocs(collection(db, "user-management"));
+          list = compress(allData);
         }
         else if (filter==='Male') {
           
           const data = query(collection(db, "user-management"), where("Gender", "==", "Male"));
           allData = await getDocs(data);
+          list=compress(allData)
         }
-        console.log(allData)
-        allData.forEach((doc) => {
-          if (doc.data().Gender === "Male") {
-            setMaleCount((prev) => prev + 1);
-          }
-          if (doc.data().Gender === "Female") {
-            setFemaleCount((prev) => prev + 1);
-          }
-          list.push({ id: doc.id, ...doc.data() });
-        });
+        else if (filter === "Female") {
+          const data = query(collection(db, "user-management"), where("Gender", "==", "Male"));
+          allData = await getDocs(data);
+          list = compress(allData)
+        }
+        
         setClients(list);
       };
       fetchData();
-    }, []);
+    }, [filter]);
   
   // using REST
   // useEffect(() => {
@@ -91,7 +103,7 @@ const Header = () => {
                   {/* dropdown */}
                 </div>
               </div>
-              {clientsMemo.map((client) => (
+              {clients.map((client) => (
                 <Lists key={client.id} client={client} />
               ))}
             </div>
