@@ -9,13 +9,14 @@ import { Outlet } from "react-router-dom";
 import { db } from "../../firebase/firebase.config";
 import Dropdown from "../../components/Dropdown";
 const Header = () => {
-    let { maleCount,femaleCount,setFemaleCount, setMaleCount } = useContext(DataContext);
+    let { filter,maleCount,femaleCount,setFemaleCount, setMaleCount,setId } = useContext(DataContext);
     const [clients, setClients] = useState([]);
     // dropdown states
-  
+  if (filter === "Male") {
+    setId("EVT0002")
+  }
   //dropdown states
     // data fetching part
-  const filter=""
   const compress = (allData) => {
     const list=[]
     allData.forEach((doc) => {
@@ -30,31 +31,31 @@ const Header = () => {
     return list;
   }
   console.log("from header",filter)
-  // useEffect(() => {
-  //     const fetchData = async () => {
-  //       let list;
-  //       let allData;
-  //       if (filter==="") {
-  //         allData = await getDocs(collection(db, "user-management"));
-  //         list = compress(allData);
-  //       }
-  //       else if (filter==='Male') {
-          
-  //         const data = query(collection(db, "user-management"), where("Gender", "==", "Male"));
-  //         allData = await getDocs(data);
-  //         list=compress(allData)
-  //       }
-  //       else if (filter === "Female") {
-  //         const data = query(collection(db, "user-management"), where("Gender", "==", "Female"));
-  //         console.log('from filter');
-  //         allData = await getDocs(data);
-  //         list = compress(allData)
-  //       }
+  useEffect(() => {
+      const fetchData = async () => {
+        let list;
+        let allData;
+        if (filter==="") {
+          allData = await getDocs(collection(db, "user-management"));
+          list = compress(allData);
+        }
+        else if (filter==='Male') {
+          console.log('from male')
+          const data = query(collection(db, "user-management"), where("Gender", "==", "Male"));
+          allData = await getDocs(data);
+          list=compress(allData)
+        }
+        else if (filter === "Female") {
+          const data = query(collection(db, "user-management"), where("Gender", "==", "Female"));
+          console.log('from filter');
+          allData = await getDocs(data);
+          list = compress(allData)
+        }
         
-  //       setClients(list);
-  //     };
-  //     fetchData();
-  //   }, [filter]);
+        setClients(list);
+      };
+      fetchData();
+    }, [filter]);
   
   // using REST
   // useEffect(() => {
