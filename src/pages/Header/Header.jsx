@@ -16,7 +16,7 @@ const Header = () => {
     setId("EVT0002")
   }
   //dropdown states
-    // data fetching part
+    // filter out all required data
   const compress = (allData) => {
     const list=[]
     allData.forEach((doc) => {
@@ -29,6 +29,12 @@ const Header = () => {
       list.push({ id: doc.id, ...doc.data() });
     });
     return list;
+  }
+  // filter by field
+  const filterByField = async(filterKey,filterValue,compressFunc) => {
+    const data = query(collection(db, "user-management"), where(filterKey, "==", filterValue));
+    const allData = await getDocs(data);
+    compressFunc(allData);
   }
   console.log("from header",filter)
   useEffect(() => {
