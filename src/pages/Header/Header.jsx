@@ -68,7 +68,6 @@ const Header = () => {
           list = compress(allData)
         }
         else if (filter === "Hyderabad") {
-          console.log('from H')
           const data = query(collection(db, "user-management"), where("Location", "==", "Hyderabad"));
           
           allData = await getDocs(data);
@@ -101,8 +100,10 @@ const Header = () => {
   return (
     <>
       {/* header */}
-      <div className="bg-blue-500 lg:h-10 flex justify-between">
-        <div className="">LOGO</div>
+      <div className="bg-[#001C7B] lg:h-10 flex justify-between">
+        <div className="ml-5">
+          <h3 className="font-bold text-xl text-[#008381]"><span className="text-2xl">S</span>ECQ<span className="text-2xl text-[#FF0000]">AI</span>SE</h3>
+        </div>
         {/* right side nav */}
         <div className="">
           <div className=""></div>
@@ -144,6 +145,12 @@ const Header = () => {
               {clients.map((client) => (
                 <Lists key={client.id} client={client} />
               ))}
+              {
+                 clients.length===0 &&
+    
+                  <div className="text-black font-bold flex justify-center items-center"> NO DATA FOUND</div>
+                
+              }
             </div>
             {/* right line */}
             <div className="relative mx-1">

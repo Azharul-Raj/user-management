@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../../../contexts/dataProvider";
 
 const Lists = (client) => {
-  const { file,id1, setId, refresh, setRefresh } = useContext(DataContext);
+  const {id1, setId, refresh, setRefresh } = useContext(DataContext);
   const { id, Location, Time, Date } = client.client;
 
   const handleId = (id) => {
     setId(id);
     setRefresh(!refresh);
   };
+ 
   
   return (
+    <>
     <Link onClick={() => handleId(id)}>
       <div
         className={`${
@@ -43,7 +45,8 @@ const Lists = (client) => {
           person detected
         </h1>
       </div>
-    </Link>
+      </Link>
+      </>
   );
 };
 export default React.memo(Lists);

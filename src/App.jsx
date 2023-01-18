@@ -7,8 +7,7 @@ function App() {
   const router = routes;
   return (
     <RouterProvider router={router}>
-    {/* <div className="App">
-      </div> */}
+    
       </RouterProvider>
   )
 }
