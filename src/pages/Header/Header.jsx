@@ -19,8 +19,11 @@ const Header = () => {
     // filter out all required data
   const compress = (allData) => {
     const list=[]
+    setMaleCount(0);
+    setFemaleCount(0)
     allData.forEach((doc) => {
       if (doc.data().Gender === "Male") {
+        
         setMaleCount((prev) => prev + 1);
       }
       if (doc.data().Gender === "Female") {
@@ -46,14 +49,14 @@ const Header = () => {
           list = compress(allData);
         }
         else if (filter==='Male') {
-          console.log('from male')
+          
           const data = query(collection(db, "user-management"), where("Gender", "==", "Male"));
           allData = await getDocs(data);
           list=compress(allData)
         }
         else if (filter === "Female") {
           const data = query(collection(db, "user-management"), where("Gender", "==", "Female"));
-          console.log('from filter');
+          
           allData = await getDocs(data);
           list = compress(allData)
         }
