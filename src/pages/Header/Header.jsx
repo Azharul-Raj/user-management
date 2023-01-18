@@ -20,7 +20,7 @@ const Header = () => {
   const compress = (allData) => {
     const list=[]
     setMaleCount(0);
-    setFemaleCount(0)
+    setFemaleCount(0);
     allData.forEach((doc) => {
       if (doc.data().Gender === "Male") {
         
@@ -37,9 +37,10 @@ const Header = () => {
   const filterByField = async(filterKey,filterValue,compressFunc) => {
     const data = query(collection(db, "user-management"), where(filterKey, "==", filterValue));
     const allData = await getDocs(data);
-    compressFunc(allData);
+    console.log(data);
+    await compressFunc(allData);
   }
-  console.log("from header",filter)
+  // console.log("from header",filter)
   useEffect(() => {
       const fetchData = async () => {
         let list;
@@ -56,6 +57,31 @@ const Header = () => {
         }
         else if (filter === "Female") {
           const data = query(collection(db, "user-management"), where("Gender", "==", "Female"));
+          
+          allData = await getDocs(data);
+          list = compress(allData)
+        }
+        else if (filter === "Chennai") {
+          const data = query(collection(db, "user-management"), where("Location", "==", "Chennai"));
+          
+          allData = await getDocs(data);
+          list = compress(allData)
+        }
+        else if (filter === "Hyderabad") {
+          console.log('from H')
+          const data = query(collection(db, "user-management"), where("Location", "==", "Hyderabad"));
+          
+          allData = await getDocs(data);
+          list = compress(allData)
+        }
+        else if (filter === "Bangalore") {
+          const data = query(collection(db, "user-management"), where("Location", "==", "Bangalore"));
+          
+          allData = await getDocs(data);
+          list = compress(allData)
+        }
+        else {
+          const data = query(collection(db, "user-management"), where("Date", "==", filter));
           
           allData = await getDocs(data);
           list = compress(allData)

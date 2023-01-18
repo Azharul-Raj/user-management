@@ -19,7 +19,7 @@ const Dropdown = () => {
     // console.log(props);
     setFilter(props)
   };
-  const cities = ["Chennai", "Hyderabd", "Banglore"];
+  const cities = ["Chennai", "Hyderabad", "Bangalore"];
   const genders = ["Male", "Female"];
   return (
     <div>
