@@ -33,70 +33,38 @@ const Header = () => {
     });
     return list;
   }
-  // filter by field
-  const filterByField = async(filterKey,filterValue,compressFunc) => {
-    const data = query(collection(db, "user-management"), where(filterKey, "==", filterValue));
-    const allData = await getDocs(data);
-    console.log(data);
-    await compressFunc(allData);
-  }
+
   // console.log("from header",filter)
-  useEffect(() => {
-      const fetchData = async () => {
-        let list;
-        let allData;
-        if (filter==="") {
-          allData = await getDocs(collection(db, "user-management"));
-          list = compress(allData);
-        }
-        else if (filter==='Male') {
-          
-          const data = query(collection(db, "user-management"), where("Gender", "==", "Male"));
-          allData = await getDocs(data);
-          list=compress(allData)
-        }
-        else if (filter === "Female") {
-          const data = query(collection(db, "user-management"), where("Gender", "==", "Female"));
-          
-          allData = await getDocs(data);
-          list = compress(allData)
-        }
-        else if (filter === "Chennai") {
-          const data = query(collection(db, "user-management"), where("Location", "==", "Chennai"));
-          
-          allData = await getDocs(data);
-          list = compress(allData)
-        }
-        else if (filter === "Hyderabad") {
-          const data = query(collection(db, "user-management"), where("Location", "==", "Hyderabad"));
-          
-          allData = await getDocs(data);
-          list = compress(allData)
-        }
-        else if (filter === "Bangalore") {
-          const data = query(collection(db, "user-management"), where("Location", "==", "Bangalore"));
-          
-          allData = await getDocs(data);
-          list = compress(allData)
-        }
-        else {
-          const data = query(collection(db, "user-management"), where("Date", "==", filter));
-          
-          allData = await getDocs(data);
-          list = compress(allData)
-        }
-        
-        setClients(list);
-      };
-      fetchData();
-    }, [filter]);
+  const filters = {
+    Male: where("Gender", "==", "Male"),
+    Female: where("Gender", "==", "Female"),
+    Chennai: where("Location", "==", "Chennai"),
+    Hyderabad: where("Location", "==", "Hyderabad"),
+    Bangalore: where("Location", "==", "Bangalore"),
+    default: where("Date", "==", filter)
+  }
   
-  // using REST
-  // useEffect(() => {
-  //   fetch("http://localhost:3001/all-user")
-  //     .then(res => res.json())
-  //   .then(data=>setClients(data))
-  // },[])
+  useEffect(() => {
+    const fetchData = async () => {
+      if (filter === "") {
+        const allData = await getDocs(collection(db, "user-management"));
+        const list = compress(allData);
+        setClients(list)
+      }
+      else {
+        
+        const queryFilter = filters[filter] || filters.default;
+        const data = query(collection(db, "user-management"),queryFilter);
+        const allData = await getDocs(data);
+        const list = compress(allData);
+        setClients(list);
+      }
+    };
+    fetchData();
+  }, [filter]);
+  
+  
+  
   return (
     <>
       {/* header */}
