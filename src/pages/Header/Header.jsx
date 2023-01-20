@@ -46,19 +46,13 @@ const Header = () => {
   
   useEffect(() => {
     const fetchData = async () => {
-      if (filter === "") {
-        const allData = await getDocs(collection(db, "user-management"));
-        const list = compress(allData);
-        setClients(list)
+      let data = collection(db, "user-management");
+      if (filter !== "") {
+        data = query(data, filters[filter] || filters.default);
       }
-      else {
-        
-        const queryFilter = filters[filter] || filters.default;
-        const data = query(collection(db, "user-management"),queryFilter);
-        const allData = await getDocs(data);
-        const list = compress(allData);
-        setClients(list);
-      }
+      const allData = await getDocs(data);
+      const list = compress(allData);
+      setClients(list);
     };
     fetchData();
   }, [filter]);
