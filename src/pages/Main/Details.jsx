@@ -23,12 +23,6 @@ const Details = () => {
     fetchData();
   }, [refresh,id1]);
 
-  // using REST
-  // useEffect(() => {
-  //   fetch(`http://localhost:3001/user/${id1}`)
-  //     .then(res => res.json())
-  //   .then(data=>setDetails(data))
-  // },[refresh])
 
   return (
     <>

@@ -10,13 +10,12 @@ const Dropdown = () => {
   const [locationOpen, setLocationOpen] = useState(false);
   const [genderOpen, setGenderOpen] = useState(false);
   const [calender, setCalender] = useState(true);
-  const [date, setDate] = useState("");
+  
 
   const handleFilter = (props) => {
     if (props === "") {
       return;
-    }
-    // console.log(props);
+    }    
     setFilter(props)
   };
   const cities = ["Chennai", "Hyderabad", "Bangalore"];

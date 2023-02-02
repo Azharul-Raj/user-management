@@ -8,11 +8,6 @@ const DataProvider = ({ children }) => {
     let [maleCount, setMaleCount] = useState(0);
     const [femaleCount, setFemaleCount] = useState(0);
     var [id1, setId] = useState("EVT0001")
-    // if(filter===""){
-    // }
-    // else if (filter === "Male") {
-    //     var [id1, setId] = useState("EVT0002")
-    // }
   
     const data={id1,filter,setFilter,setId,refresh,setRefresh,maleCount,setMaleCount,femaleCount,setFemaleCount}
     return (

@@ -1,8 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { collection, query,where,getDocs } from "firebase/firestore";
-
-
-
 import Lists from "../Main/Lists/Lists";
 import { DataContext } from "../../contexts/dataProvider";
 import { Outlet } from "react-router-dom";
@@ -22,8 +19,7 @@ const Header = () => {
     setMaleCount(0);
     setFemaleCount(0);
     allData.forEach((doc) => {
-      if (doc.data().Gender === "Male") {
-        
+      if (doc.data().Gender === "Male") {        
         setMaleCount((prev) => prev + 1);
       }
       if (doc.data().Gender === "Female") {
